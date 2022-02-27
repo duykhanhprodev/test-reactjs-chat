@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     setInterval(() => {
       const lastMsg = refMsgs.current[refMsgs.current.length - 1];
-      dispatch(loadNewMessage(lastMsg.id));
+      if (lastMsg) dispatch(loadNewMessage(lastMsg.id));
     }, 100);
   }, [dispatch]);
   return (
