@@ -1,9 +1,11 @@
-import { LOAD_DATA, LOGIN } from "../constants";
+import { unionBy } from "lodash";
+import { LOAD_DATA, LOAD_HISTORY, LOAD_NEW_DATA, LOGIN } from "../constants";
 
 const initialState = {
   messages: {
     data: [],
     loading: true,
+    page: 0,
   },
   user: {
     name: "",
@@ -17,7 +19,27 @@ const chatBox = (state = initialState, action) => {
       return {
         ...state,
         messages: {
-          data: action.data,
+          ...state.messages,
+          data: unionBy([...state.messages.data, ...action.data], "id"),
+          loading: false,
+        },
+      };
+    case LOAD_HISTORY:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          data: unionBy([...action.data, ...state.messages.data], "id"),
+          loading: false,
+          page: action.page || 0,
+        },
+      };
+    case LOAD_NEW_DATA:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          data: unionBy([...state.messages.data, ...action.data], "id"),
           loading: false,
         },
       };

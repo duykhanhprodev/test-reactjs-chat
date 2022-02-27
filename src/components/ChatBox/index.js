@@ -1,8 +1,13 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
+import { get } from "lodash";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { loadHistoryMessage } from "../../redux/actions/chatbox";
 import { setNewMessage } from "../../utils/helper";
-const ChatBox = ({ user, messages = [] }) => {
+const ChatBox = (props) => {
+  const { page, user, messages = [] } = props;
+  const dispatch = useDispatch();
   const [msg, setMsg] = useState("");
   const wrapRef = useRef(null);
   useEffect(() => {
@@ -23,9 +28,14 @@ const ChatBox = ({ user, messages = [] }) => {
     setMsg("");
     wrapRef.current.scrollTop = wrapRef.current.scrollHeight;
   };
+
   const handleOnScroll = (e) => {
-    if (wrapRef.current.scrollTop === 0) {
-      console.log("load more");
+    if (
+      wrapRef.current.scrollTop === 0 &&
+      messages &&
+      get(messages, "0.id") > 0
+    ) {
+      dispatch(loadHistoryMessage(page + 1, messages[0].id));
     }
   };
   return (
