@@ -1,36 +1,19 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Input, Button } from "antd";
 import { useState } from "react";
-const ChatBox = () => {
+import { setNewMessage } from "../../utils/helper";
+const ChatBox = ({ user, messages = [] }) => {
   const [msg, setMsg] = useState("");
-  const user = {
-    name: "AAA",
-    id: "111",
-  };
-  const messages = [
-    {
-      user: { name: "AAA", id: "111" },
-      content: "ME",
-    },
-    {
-      user: { name: "AAA", id: "222" },
-      content: "AAAAA",
-    },
-    {
-      user: { name: "AAA", id: "333" },
-      content: "AAAAA",
-    },
-    {
-      user: { name: "AAA", id: "111" },
-      content: "ME",
-    },
-  ];
 
   const handleOnChange = (e) => {
     setMsg(e.target.value);
   };
   const handleOnSend = (e) => {
     e.preventDefault();
+    setNewMessage({
+      user,
+      content: msg,
+    });
     setMsg("");
   };
   return (

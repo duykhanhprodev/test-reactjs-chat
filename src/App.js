@@ -7,18 +7,23 @@ import ChatBox from "./components/ChatBox";
 
 function App() {
   const data = useSelector((state) => state.chatbox);
-  const { user } = data;
+  const { user, messages } = data;
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(loadMessage());
+    setInterval(() => {
+      dispatch(loadMessage());
+    }, 300);
   }, [dispatch]);
 
   return (
     <div className="App">
-      {/* <main>{user.id ? <ChatBox /> : <LoginForm />}</main> */}
       <main>
-        <ChatBox />
+        {user.id ? (
+          <ChatBox messages={messages.data} user={user} />
+        ) : (
+          <LoginForm />
+        )}
       </main>
     </div>
   );
