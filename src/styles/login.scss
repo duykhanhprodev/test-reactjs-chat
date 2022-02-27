@@ -2,3 +2,59 @@
   margin: 24px auto;
   max-width: 600px;
 }
+
+.container-chat-box {
+  margin: 24px auto;
+  max-width: 600px;
+  width: 100%;
+  border: 1px solid #000;
+  border-radius: 20px;
+  overflow: hidden;
+  .wrap-message {
+    padding: 24px;
+
+    display: flex;
+    justify-content: initial;
+    margin-bottom: 20px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .avatar {
+      padding: 8px;
+      width: 38px;
+      height: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #7459f6;
+      border-radius: 50%;
+      margin: 0 8px;
+      svg {
+        width: 28px;
+        height: 28px;
+        fill: #fff;
+      }
+    }
+
+    &.self {
+      flex-direction: row-reverse;
+      .avatar {
+        background-color: #cccccc;
+      }
+    }
+  }
+  .wrap-input-message {
+    padding: 24px;
+    background-color: #7459f6;
+
+    form {
+      display: flex;
+      input {
+        border-radius: 20px;
+      }
+      button {
+        margin-left: 12px;
+        border-radius: 20px;
+      }
+    }
+  }
+}

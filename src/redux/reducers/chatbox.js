@@ -5,7 +5,10 @@ const initialState = {
     data: [],
     loading: true,
   },
-  name: "",
+  user: {
+    name: "",
+    id: "",
+  },
 };
 
 const chatBox = (state = initialState, action) => {
@@ -21,7 +24,7 @@ const chatBox = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        name: action.data,
+        user: { name: action.data, id: new Date().getTime() },
       };
 
     default:

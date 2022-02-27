@@ -7,7 +7,7 @@ import ChatBox from "./components/ChatBox";
 
 function App() {
   const data = useSelector((state) => state.chatbox);
-  const { name } = data;
+  const { user } = data;
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,7 +16,10 @@ function App() {
 
   return (
     <div className="App">
-      <main>{name ? <ChatBox /> : <LoginForm />}</main>
+      {/* <main>{user.id ? <ChatBox /> : <LoginForm />}</main> */}
+      <main>
+        <ChatBox />
+      </main>
     </div>
   );
 }
