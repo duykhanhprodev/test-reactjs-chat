@@ -1,3 +1,6 @@
+.pd24 {
+  padding: 24px;
+}
 .login-form {
   margin: 24px auto;
   max-width: 600px;
@@ -10,14 +13,25 @@
   border: 1px solid #000;
   border-radius: 20px;
   overflow: hidden;
+  .wrap-messages {
+    height: 600px;
+    overflow: auto;
+  }
   .wrap-message {
-    padding: 24px;
-
     display: flex;
     justify-content: initial;
     margin-bottom: 20px;
     align-items: flex-start;
     justify-content: flex-start;
+    h6 {
+      font-size: 12px;
+      margin: 0;
+      font-weight: 600;
+    }
+    p {
+      font-size: 14px;
+      margin: 0;
+    }
     .avatar {
       padding: 8px;
       width: 38px;
@@ -34,18 +48,23 @@
         fill: #fff;
       }
     }
+    .content-msg {
+      display: flex;
+      flex-direction: column;
+    }
 
     &.self {
       flex-direction: row-reverse;
       .avatar {
         background-color: #cccccc;
       }
+      .content-msg {
+        align-items: flex-end;
+      }
     }
   }
   .wrap-input-message {
-    padding: 24px;
     background-color: #7459f6;
-
     form {
       display: flex;
       input {

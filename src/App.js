@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./styles/login.scss";
+import "./styles/chatbox.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMessage } from "./redux/actions/chatbox";
 import LoginForm from "./components/LoginForm";
@@ -11,11 +11,12 @@ function App() {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    // dispatch(loadMessage());
+
     setInterval(() => {
       dispatch(loadMessage());
     }, 300);
   }, [dispatch]);
-
   return (
     <div className="App">
       <main>

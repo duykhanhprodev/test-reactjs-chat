@@ -10,12 +10,12 @@ export const loadData = () => {
   return data;
 };
 
-export const setNewMessage = (newMsg, cb) => {
+export const setNewMessage = (newData, cb) => {
   const data = JSON.parse(localStorage.getItem("messages")) || [];
   data.push({
-    ...newMsg,
+    id: data.length,
+    ...newData,
     time: new Date().getTime(),
   });
-  const dataSort = sortBy(data, "time");
-  localStorage.setItem("messages", JSON.stringify(dataSort));
+  localStorage.setItem("messages", JSON.stringify(data));
 };
