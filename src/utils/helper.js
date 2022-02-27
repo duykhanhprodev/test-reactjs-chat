@@ -1,27 +1,18 @@
-export const loadData = (page = 0, last) => {
+export const loadData = (type = "NEW", page = 0, last) => {
   let data = [];
   try {
     data = JSON.parse(window.localStorage.getItem("messages")) || [];
   } catch (e) {
     console.log(e);
   }
-
-  if (page > 0) {
+  if (type === "INIT") {
+    return data.slice(-25);
+  } else if (type === "NEW") {
+    return data.slice(last);
+  } else if (type === "HISTORY") {
     const first = last - 25 * page > 0 ? last - 25 * page : 0;
     return data.slice(first, last);
-  } else {
-    return data.slice(-25);
   }
-};
-
-export const loadNewData = (offset) => {
-  let data = [];
-  try {
-    data = JSON.parse(window.localStorage.getItem("messages")) || [];
-  } catch (e) {
-    console.log(e);
-  }
-  return data.slice(offset);
 };
 
 export const setNewMessage = (newData, cb) => {

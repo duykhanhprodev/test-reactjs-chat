@@ -10,7 +10,7 @@ function App() {
   const refMsgs = useRef();
   const data = useSelector((state) => state.chatbox);
   const { user, messages } = data;
-  const { page } = messages;
+  const { page, loading } = messages;
   refMsgs.current = messages.data;
 
   useEffect(() => {
@@ -21,13 +21,18 @@ function App() {
     setInterval(() => {
       const lastMsg = refMsgs.current[refMsgs.current.length - 1];
       dispatch(loadNewMessage(lastMsg.id));
-    }, 300);
+    }, 100);
   }, [dispatch]);
   return (
     <div className="App">
       <main>
         {user.id ? (
-          <ChatBox page={page} messages={refMsgs.current} user={user} />
+          <ChatBox
+            page={page}
+            messages={refMsgs.current}
+            user={user}
+            loading={loading}
+          />
         ) : (
           <LoginForm />
         )}

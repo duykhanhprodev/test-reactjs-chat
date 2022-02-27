@@ -3,10 +3,11 @@ import { Input, Button } from "antd";
 import { get } from "lodash";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
+import { LoadingOutlined } from "@ant-design/icons";
 import { loadHistoryMessage } from "../../redux/actions/chatbox";
 import { setNewMessage } from "../../utils/helper";
 const ChatBox = (props) => {
-  const { page, user, messages = [] } = props;
+  const { page, user, messages = [], loading } = props;
   const dispatch = useDispatch();
   const [msg, setMsg] = useState("");
   const wrapRef = useRef(null);
@@ -26,22 +27,34 @@ const ChatBox = (props) => {
       content: msg,
     });
     setMsg("");
-    wrapRef.current.scrollTop = wrapRef.current.scrollHeight;
+    setTimeout(() => {
+      wrapRef.current.scrollTop = wrapRef.current.scrollHeight;
+    }, 150);
   };
 
   const handleOnScroll = (e) => {
     if (
-      wrapRef.current.scrollTop === 0 &&
-      messages &&
+      !loading &&
+      wrapRef.current.scrollTop <= 10 &&
       get(messages, "0.id") > 0
     ) {
       dispatch(loadHistoryMessage(page + 1, messages[0].id));
+
+      setTimeout(() => {
+        wrapRef.current.scrollTop = 60;
+      }, 300);
     }
   };
+
   return (
     <div className="container-chat-box">
-      <div className="pd24">
+      <div className="pd24 wrap-chat-box">
         <div ref={wrapRef} className="wrap-messages" onScroll={handleOnScroll}>
+          {loading && (
+            <div className="loading">
+              <LoadingOutlined />{" "}
+            </div>
+          )}
           {messages.map((msg, index) => (
             <div
               className={`wrap-message ${

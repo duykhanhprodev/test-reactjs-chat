@@ -1,5 +1,11 @@
 import { unionBy } from "lodash";
-import { LOAD_DATA, LOAD_HISTORY, LOAD_NEW_DATA, LOGIN } from "../constants";
+import {
+  LOADING,
+  LOAD_DATA,
+  LOAD_HISTORY,
+  LOAD_NEW_DATA,
+  LOGIN,
+} from "../constants";
 
 const initialState = {
   messages: {
@@ -15,6 +21,14 @@ const initialState = {
 
 const chatBox = (state = initialState, action) => {
   switch (action.type) {
+    case LOADING:
+      return {
+        ...state,
+        messages: {
+          ...state.messages,
+          loading: true,
+        },
+      };
     case LOAD_DATA:
       return {
         ...state,
@@ -40,7 +54,6 @@ const chatBox = (state = initialState, action) => {
         messages: {
           ...state.messages,
           data: unionBy([...state.messages.data, ...action.data], "id"),
-          loading: false,
         },
       };
     case LOGIN:

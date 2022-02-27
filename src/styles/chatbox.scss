@@ -13,6 +13,20 @@
   border: 1px solid #000;
   border-radius: 20px;
   overflow: hidden;
+  .wrap-chat-box {
+    padding-top: 64px;
+    position: relative;
+  }
+  .loading {
+    position: absolute;
+    top: 16px;
+    transform: translateX(-50%);
+    left: 50%;
+    svg {
+      height: 36px;
+      width: 36px;
+    }
+  }
   .wrap-messages {
     height: 600px;
     overflow: auto;

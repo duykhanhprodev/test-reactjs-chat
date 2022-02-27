@@ -1,11 +1,9 @@
 import { Form, Input, Button } from "antd";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/chatbox";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.chatbox);
-
   const onFinish = (values) => {
     dispatch(login(values.name));
   };
