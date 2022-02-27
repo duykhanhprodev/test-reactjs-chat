@@ -1,21 +1,22 @@
 import React, { useEffect } from "react";
-import "./App.css";
+import "./styles/login.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { loadMessage } from "./redux/actions/chatbox";
+import LoginForm from "./components/LoginForm";
+import ChatBox from "./components/ChatBox";
 
 function App() {
   const data = useSelector((state) => state.chatbox);
+  const { name } = data;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(loadMessage());
   }, [dispatch]);
 
-  console.log("data", data);
-
   return (
     <div className="App">
-      <header className="App-header"></header>
+      <main>{name ? <ChatBox /> : <LoginForm />}</main>
     </div>
   );
 }

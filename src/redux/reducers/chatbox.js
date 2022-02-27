@@ -1,10 +1,11 @@
-import { LOAD_DATA } from "../constants";
+import { LOAD_DATA, LOGIN } from "../constants";
 
 const initialState = {
   messages: {
     data: [],
     loading: true,
   },
+  name: "",
 };
 
 const chatBox = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const chatBox = (state = initialState, action) => {
           data: action.data,
           loading: false,
         },
+      };
+    case LOGIN:
+      return {
+        ...state,
+        name: action.data,
       };
 
     default:
